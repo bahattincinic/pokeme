@@ -33,6 +33,9 @@ class NoteCreate(typesystem.Object):
     required = ['title', 'description']
 
 
+class TodoId(typesystem.Integer):
+    description = 'Todo ID'
+
 class TodoTitle(typesystem.String):
     description = 'Title'
 
@@ -80,6 +83,7 @@ class TodoList(typesystem.Object):
     properties = {
         'title': TodoTitle,
         'text': TodoDescription,
+        'id': TodoId,
         'due_date': TodoDueDate,
         'is_completed': typesystem.Boolean,
         'created_at': TodoCreationDate
