@@ -1,5 +1,4 @@
 # Pokeme
-===============================
 
 To-do & Note Android App
 
