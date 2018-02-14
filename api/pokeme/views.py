@@ -25,6 +25,21 @@ def user_profile(session: Session, auth: Auth):
     }
 
 
+@annotate(authentication=[SQLAlchemyTokenAuthentication()],
+          permissions=[IsAuthenticated()])
+def update_profile(session: Session, auth: Auth, data: Signup,
+                   settings: Settings):
+    """
+    This endpoint updates current user profile
+    """
+    user = session.query(User).filter(User.id == auth.user.id).first()
+    user.username = data['username']
+    user.password = hash_password(data['password'], settings)
+
+    session.commit()
+    return Response(status=200)
+
+
 def signup(session: Session, data: Signup, settings: Settings):
     """
     This endpoint creates user
