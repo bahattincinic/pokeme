@@ -9,15 +9,15 @@ from pokeme.views import (
 
 
 routes = [
-    Route('/me', 'GET', user_profile, 'User-Profile'),
-    Route('/signup', 'POST', signup, 'Signup'),
-    Route('/token', 'POST', sqlalcamy_get_token, 'Login'),
+    Route('/me/', 'GET', user_profile, 'User-Profile'),
+    Route('/signup/', 'POST', signup, 'Signup'),
+    Route('/token/', 'POST', sqlalcamy_get_token, 'Login'),
     Route('/notes/', 'GET', list_notes, 'List-Notes'),
-    Route('/notes', 'POST', create_note, 'Create-Note'),
+    Route('/notes/', 'POST', create_note, 'Create-Note'),
     Route('/notes/{note}/', 'DELETE', delete_note, 'Delete-Note'),
     Route('/notes/{note}/', 'PUT', update_note, 'Update-Note'),
     Route('/todos/', 'GET', list_todos, 'List-Todos'),
-    Route('/todos', 'POST', create_todo, 'Create-Todo'),
+    Route('/todos/', 'POST', create_todo, 'Create-Todo'),
     Route('/todos/{todo}/', 'DELETE', delete_todo, 'Delete-Todo'),
     Route('/todos/{todo}/', 'PUT', update_todo, 'Update-Todo'),
     Include('/docs', docs_urls),
