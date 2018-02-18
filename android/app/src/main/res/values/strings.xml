@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">Pokeme</string>
+    <string name="login_btn">Login</string>
+    <string name="signup_btn">Signup</string>
+    <string name="login_activity_name">Login</string>
+    <string name="signup_activity_name">Signup</string>
 </resources>
