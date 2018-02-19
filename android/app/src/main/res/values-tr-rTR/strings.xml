@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Pokeme</string>
+    <string name="signup_btn">Üye Ol</string>
+    <string name="login_activity_name">Giriş yap</string>
+    <string name="signup_activity_name">Üye Ol</string>
+    <string name="username_label">Kullanıcı Adı</string>
+    <string name="password_label">Şifre</string>
+    <string name="username_required_message">Kullanıcı adı alanı zorunludur</string>
+    <string name="password_required_message">Şifre alanı zorunludur</string>
+    <string name="login_btn">Giriş Yap</string>
+</resources>
