@@ -20,4 +20,6 @@
         <activity android:name=".SignupActivity" android:label="@string/signup_activity_name"></activity>
     </application>
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
 </manifest>
