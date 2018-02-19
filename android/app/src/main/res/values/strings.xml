@@ -8,4 +8,5 @@
     <string name="password_label">Password</string>
     <string name="username_required_message">Username is Required</string>
     <string name="password_required_message">Password is Required</string>
+    <string name="loading">Loading...</string>
 </resources>
