@@ -1,9 +1,9 @@
 package com.pokeme;
 
 
-public class Config {
+public class ApiClient {
     /*
-    This Class contains API configurations.
+    This Class contains API Integrations.
     */
 
     public static final String API_DOMAIN = "http://localhost:8080";
