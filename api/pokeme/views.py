@@ -5,8 +5,9 @@ from apistar.permissions import IsAuthenticated
 from apistar.exceptions import NotFound
 
 from apistar_token_auth.authentication import SQLAlchemyTokenAuthentication
+from apistar_token_auth.utils import generate_key
 from .schemas import Signup
-from .models import User, Note, Todo
+from .models import User, Note, Todo, AccessToken
 from .utils import hash_password
 from .schemas import (
     TodoCreate, TodoList, NoteCreate, NoteList, TodoId, NoteId
@@ -52,9 +53,13 @@ def signup(session: Session, data: Signup, settings: Settings):
     session.add(user)
     session.flush()
 
+    token = AccessToken(token=generate_key(), user=user)
+    session.add(token)
+
     return {
         'id': user.id,
-        'username': user.username
+        'username': user.username,
+        'token': token.token
     }
 
 
