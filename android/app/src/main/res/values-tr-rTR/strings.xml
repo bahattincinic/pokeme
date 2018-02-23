@@ -12,4 +12,6 @@
     <string name="loading">Yükleniyor...</string>
     <string name="username_used">Kullanıcı adı zaten kullanımda</string>
     <string name="login_invalid">Kullanıcı adı veya şifre geçersiz</string>
+    <string name="create_new_todo">Yeni Görev Oluştur</string>
+    <string name="create_new_note">Yeni Not Oluştur</string>
 </resources>
