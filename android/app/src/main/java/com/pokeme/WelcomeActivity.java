@@ -39,7 +39,7 @@ public class WelcomeActivity extends AppCompatActivity {
         dialog.show();
 
         try {
-            JsonObjectRequest request = UserService.profile(token, new VolleyCallback() {
+            JsonObjectRequest request = UserService.getProfile(token, new VolleyCallback() {
                 @Override
                 public void onSuccess(JSONObject instance) {
                     Intent intent = new Intent(WelcomeActivity.this, DashboardActivity.class);
