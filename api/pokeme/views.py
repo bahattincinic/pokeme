@@ -53,7 +53,7 @@ def signup(session: Session, data: Signup, settings: Settings):
     session.add(user)
     session.flush()
 
-    token = AccessToken(token=generate_key(), user=user)
+    token = AccessToken(token=generate_key(), user_id=user.id)
     session.add(token)
 
     return {
