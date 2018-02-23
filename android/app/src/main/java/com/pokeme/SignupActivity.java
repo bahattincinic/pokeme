@@ -17,7 +17,7 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.google.gson.Gson;
 import com.pokeme.models.User;
 import com.pokeme.service.NetworkManager;
-import com.pokeme.service.Session;
+import com.pokeme.store.Session;
 import com.pokeme.service.UserService;
 import com.pokeme.service.VolleyCallback;
 

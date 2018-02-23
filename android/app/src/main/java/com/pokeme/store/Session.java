@@ -1,9 +1,11 @@
-package com.pokeme.service;
+package com.pokeme.store;
 
 
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
+
+import com.pokeme.service.Config;
 
 
 public class Session {
