@@ -9,10 +9,6 @@ import com.android.volley.toolbox.Volley;
 
 
 public class NetworkManager {
-    /*
-    This Class contains API Integrations.
-    */
-
     private static NetworkManager instance;
     private RequestQueue queue;
 

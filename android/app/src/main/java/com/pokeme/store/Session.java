@@ -27,6 +27,10 @@ public class Session {
         prefs.edit().putString(Config.TOKEN_SESSION_KEY, token).apply();
     }
 
+    public void clearSession() {
+        prefs.edit().clear().apply();
+    }
+
     public String getToken() {
         return prefs.getString(Config.TOKEN_SESSION_KEY, "");
     }
