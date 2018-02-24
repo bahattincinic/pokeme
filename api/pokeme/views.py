@@ -2,15 +2,16 @@ from apistar import Response, annotate, Settings
 from apistar.backends.sqlalchemy_backend import Session
 from apistar.interfaces import Auth
 from apistar.permissions import IsAuthenticated
-from apistar.exceptions import NotFound
+from apistar.exceptions import NotFound, ValidationError
 
 from apistar_token_auth.authentication import SQLAlchemyTokenAuthentication
 from apistar_token_auth.utils import generate_key
 from .schemas import Signup
-from .models import User, Note, Todo, AccessToken
+from .models import User, Note, Category, AccessToken
 from .utils import hash_password
 from .schemas import (
-    TodoCreate, TodoList, NoteCreate, NoteList, TodoId, NoteId
+    NoteCreate, NoteList, CategoryCreate, CategoryList,
+    ProfileUpdate
 )
 
 
@@ -28,14 +29,21 @@ def user_profile(session: Session, auth: Auth):
 
 @annotate(authentication=[SQLAlchemyTokenAuthentication()],
           permissions=[IsAuthenticated()])
-def update_profile(session: Session, auth: Auth, data: Signup,
+def update_profile(session: Session, auth: Auth, data: ProfileUpdate,
                    settings: Settings):
     """
     This endpoint updates current user profile
     """
     user = session.query(User).filter(User.id == auth.user.id).first()
+
+    if data['username'] != user.username and session.query(User).filter(
+            User.username == data['username']).count() != 0:
+        raise ValidationError({'message': 'Username already in use'})
+
     user.username = data['username']
-    user.password = hash_password(data['password'], settings)
+
+    if data.get('password'):
+        user.password = hash_password(data['password'], settings)
 
     session.commit()
     return Response(status=200)
@@ -134,7 +142,7 @@ def list_notes(session: Session, auth: Auth):
 
 @annotate(authentication=[SQLAlchemyTokenAuthentication()],
           permissions=[IsAuthenticated()])
-def create_todo(session: Session, data: TodoCreate, auth: Auth):
+def create_category(session: Session, data: TodoCreate, auth: Auth):
     """
     This endpoint creates todo
     """
@@ -152,7 +160,7 @@ def create_todo(session: Session, data: TodoCreate, auth: Auth):
 
 @annotate(authentication=[SQLAlchemyTokenAuthentication()],
           permissions=[IsAuthenticated()])
-def update_todo(session: Session, todo: TodoId, auth: Auth, data: TodoCreate):
+def update_category(session: Session, todo: TodoId, auth: Auth, data: TodoCreate):
     """
     This endpoint updated todo
     """

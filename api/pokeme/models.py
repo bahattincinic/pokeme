@@ -27,26 +27,30 @@ class AccessToken(Base):
     user_id = Column(Integer)
 
 
+class Category(Base):
+    __tablename__ = 'categories'
+
+    id = Column(Integer, primary_key=True)
+    user_id = Column(Integer, ForeignKey("users.id"))
+    user = relationship("User")
+
+    name = Column(String)
+    created_at = Column(DateTime, default=func.now())
+
+
 class Note(Base):
     __tablename__ = 'notes'
 
     id = Column(Integer, primary_key=True)
+
     user_id = Column(Integer, ForeignKey("users.id"))
     user = relationship("User")
+    category_id = Column(Integer, ForeignKey("categories.id"), nullable=True)
+    category = relationship("Category")
+
     title = Column(String)
     text = Column(Text)
     created_at = Column(DateTime, default=func.now())
 
-
-class Todo(Base):
-    __tablename__ = 'todos'
-
-    id = Column(Integer, primary_key=True)
-    user_id = Column(Integer, ForeignKey("users.id"))
-    user = relationship("User")
-
-    title = Column(String)
-    text = Column(Text)
-    due_date = Column(DateTime, nullable=True)
-    created_at = Column(DateTime, default=func.now())
-    is_completed = Column(Boolean, default=False)
+    is_archived = Column(Boolean, default=False)
+    reminder_date = Column(DateTime, nullable=True)

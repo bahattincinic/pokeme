@@ -1,90 +1,48 @@
 from apistar import typesystem
 
 
-class Password(typesystem.String):
-    description = 'Password'
-
-
-class Username(typesystem.String):
-    description = 'Username'
-
-
-class NoteTitle(typesystem.String):
-    description = 'Title'
-
-
-class NoteDescription(typesystem.String):
-    description = 'description'
-
-
-class NoteId(typesystem.Integer):
-    description = 'Note ID'
-
-
-class NoteCreationDate(typesystem.String):
-    description = 'Creation Date'
-
-
 class NoteCreate(typesystem.Object):
     properties = {
-        'title': NoteTitle,
-        'text': NoteDescription
+        'title': typesystem.String,
+        'text': typesystem.String
     }
     required = ['title', 'description']
 
 
-class TodoId(typesystem.Integer):
-    description = 'Todo ID'
-
-class TodoTitle(typesystem.String):
-    description = 'Title'
-
-
-class TodoDescription(typesystem.String):
-    description = 'description'
-
-
-class TodoDueDate(typesystem.String):
-    description = 'Due Date'
-
-
-class TodoCreationDate(typesystem.String):
-    description = 'Creation Date'
-
-
 class Signup(typesystem.Object):
     properties = {
-        'username': Username,
-        'password': Password
+        'username': typesystem.String(),
+        'password': typesystem.String()
     }
     required = ['username', 'password']
 
 
+class ProfileUpdate(typesystem.Object):
+    properties = {
+        'username': typesystem.String(),
+        'password': typesystem.String()
+    }
+    required = ['username']
+
+
 class NoteList(typesystem.Object):
     properties = {
-        'title': NoteTitle,
-        'text': NoteDescription,
-        'id': NoteId,
-        'created_at': NoteCreationDate
+        'title': typesystem.String(),
+        'text': typesystem.String(),
+        'id': typesystem.Integer(),
+        'created_at': typesystem.String()
     }
 
 
-class TodoCreate(typesystem.Object):
+class CategoryCreate(typesystem.Object):
     properties = {
-        'title': TodoTitle,
-        'text': TodoDescription,
-        'due_date': TodoDueDate,
-        'is_completed': typesystem.Boolean
+        'name': typesystem.String(),
     }
-    required = ['title', 'text']
+    required = ['name']
 
 
-class TodoList(typesystem.Object):
+class CategoryList(typesystem.Object):
     properties = {
-        'title': TodoTitle,
-        'text': TodoDescription,
-        'id': TodoId,
-        'due_date': TodoDueDate,
-        'is_completed': typesystem.Boolean,
-        'created_at': TodoCreationDate
+        'name': typesystem.String(),
+        'id': typesystem.Integer()
     }
