@@ -29,8 +29,8 @@
             android:label="@string/app_name" />
         <activity android:name=".NoteCreateActivity"
             android:label="@string/create_new_note" />
-        <activity android:name=".TodoCreateActivity"
-            android:label="@string/create_new_todo"/>
+        <activity android:name=".CategoryCreateActivity"
+            android:label="@string/create_new_category"/>
     </application>
 
 </manifest>
