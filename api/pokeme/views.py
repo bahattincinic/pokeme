@@ -89,7 +89,7 @@ def create_note(session: Session, data: NoteCreate, auth: Auth):
     if data.get('category'):
         category = session.query(Category).filter(
             Category.id == data['category'],
-            Note.user_id == auth.user.id
+            Category.user_id == auth.user.id
         ).first()
         
         if not category:
@@ -172,10 +172,19 @@ def list_notes(session: Session, auth: Auth):
         Note.user_id == auth.user.id
     ).outerjoin(Category, Category.id == Note.category_id).all()
 
-    return [
-        NoteList(note)
-        for note in notes
-    ]
+    response = []
+    for note in notes:
+        props = {
+            'title': note.title,
+            'text': note.text,
+            'id': note.id,
+            'created_at': note.created_at
+        }
+        if note.category:
+            props['category'] = CategoryList(note.category)
+
+        response.append(NoteList(**props))
+    return response
 
 
 @annotate(authentication=[SQLAlchemyTokenAuthentication()],
@@ -186,8 +195,7 @@ def create_category(session: Session, data: CategoryCreate, auth: Auth):
     """
     instance = Category(
         user_id=auth.user.id,
-        title=data['title'],
-        text=data['text']
+        name=data['name']
     )
     session.add(instance)
     session.flush()
@@ -201,18 +209,19 @@ def update_category(session: Session, category: int, auth: Auth, data: CategoryC
     This endpoint updated category
     """
     instance = session.query(Category).filter(
-        Category.id == Category,
+        Category.id == category,
         Category.user_id == auth.user.id
     ).first()
 
     if not instance:
         raise NotFound({'message': 'Category not found'})
 
-    instance.title = data['title']
-    instance.text = data['text']
+    instance.name = data['name']
     session.commit()
     return CategoryList(
-        session.query(Category).filter(Category.id == Category).first()
+        session.query(Category).filter(
+            Category.id == instance.id
+        ).first()
     )
 
 
@@ -244,6 +253,6 @@ def list_categories(session: Session, auth: Auth):
     categories = session.query(Category).filter(
         Category.user_id == auth.user.id).all()
     return [
-        Category(category)
+        CategoryList(category)
         for category in categories
     ]
