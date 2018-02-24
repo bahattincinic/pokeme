@@ -82,6 +82,24 @@ def create_note(session: Session, data: NoteCreate, auth: Auth):
         title=data['title'],
         text=data['text']
     )
+
+    if data.get('reminder_date'):
+        instance.reminder_date = data['reminder_date']
+    
+    if data.get('category'):
+        category = session.query(Category).filter(
+            Category.id == data['category'],
+            Note.user_id == auth.user.id
+        ).first()
+        
+        if not category:
+            raise ValidationError({'message': 'Invalid category'})
+
+        instance.category_id = category.id
+
+    if data.get('is_archived'):
+        instance.is_archived = data['is_archived']
+
     session.add(instance)
     session.flush()
     return NoteList(instance)
@@ -89,7 +107,7 @@ def create_note(session: Session, data: NoteCreate, auth: Auth):
 
 @annotate(authentication=[SQLAlchemyTokenAuthentication()],
           permissions=[IsAuthenticated()])
-def update_note(session: Session, note: NoteId, auth: Auth, data: NoteCreate):
+def update_note(session: Session, note: int, auth: Auth, data: NoteCreate):
     """
     This endpoint updates note
     """
@@ -103,13 +121,31 @@ def update_note(session: Session, note: NoteId, auth: Auth, data: NoteCreate):
 
     instance.title = data['title']
     instance.text = data['text']
+
+    if data.get('reminder_date'):
+        instance.reminder_date = data['reminder_date']
+    
+    if data.get('category'):
+        category = session.query(Category).filter(
+            Category.id == data['category'],
+            Note.user_id == auth.user.id
+        ).first()
+        
+        if not category:
+            raise ValidationError({'message': 'Invalid category'})
+
+        instance.category_id = category.id
+    
+    if data.get('is_archived'):
+        instance.is_archived = data['is_archived']
+
     session.commit()
     return NoteList(session.query(Note).filter(Note.id == note).first())
 
 
 @annotate(authentication=[SQLAlchemyTokenAuthentication()],
           permissions=[IsAuthenticated()])
-def delete_note(session: Session, note: NoteId, auth: Auth):
+def delete_note(session: Session, note: int, auth: Auth):
     """
     This endpoint deletes note
     """
@@ -133,7 +169,9 @@ def list_notes(session: Session, auth: Auth):
     This endpoint shows notes
     """
     notes = session.query(Note).filter(
-        Note.user_id == auth.user.id).all()
+        Note.user_id == auth.user.id
+    ).outerjoin(Category, Category.id == Note.category_id).all()
+
     return [
         NoteList(note)
         for note in notes
@@ -142,57 +180,55 @@ def list_notes(session: Session, auth: Auth):
 
 @annotate(authentication=[SQLAlchemyTokenAuthentication()],
           permissions=[IsAuthenticated()])
-def create_category(session: Session, data: TodoCreate, auth: Auth):
+def create_category(session: Session, data: CategoryCreate, auth: Auth):
     """
-    This endpoint creates todo
+    This endpoint creates category
     """
-    instance = Todo(
+    instance = Category(
         user_id=auth.user.id,
         title=data['title'],
-        text=data['text'],
-        due_date=data['due_date'],
-        is_completed=data['is_completed']
+        text=data['text']
     )
     session.add(instance)
     session.flush()
-    return TodoList(instance)
+    return CategoryList(instance)
 
 
 @annotate(authentication=[SQLAlchemyTokenAuthentication()],
           permissions=[IsAuthenticated()])
-def update_category(session: Session, todo: TodoId, auth: Auth, data: TodoCreate):
+def update_category(session: Session, category: int, auth: Auth, data: CategoryCreate):
     """
-    This endpoint updated todo
+    This endpoint updated category
     """
-    instance = session.query(Todo).filter(
-        Todo.id == todo,
-        Todo.user_id == auth.user.id
+    instance = session.query(Category).filter(
+        Category.id == Category,
+        Category.user_id == auth.user.id
     ).first()
 
     if not instance:
-        raise NotFound({'message': 'Todo not found'})
+        raise NotFound({'message': 'Category not found'})
 
     instance.title = data['title']
     instance.text = data['text']
-    instance.due_date = data['due_date']
-    instance.is_completed = data['is_completed']
     session.commit()
-    return TodoList(session.query(Todo).filter(Todo.id == todo).first())
+    return CategoryList(
+        session.query(Category).filter(Category.id == Category).first()
+    )
 
 
 @annotate(authentication=[SQLAlchemyTokenAuthentication()],
           permissions=[IsAuthenticated()])
-def delete_todo(session: Session, todo: TodoId, auth: Auth):
+def delete_category(session: Session, category: int, auth: Auth):
     """
-    This endpoint deleted todo
+    This endpoint deletes category
     """
-    instance = session.query(Todo).filter(
-        Todo.id == todo,
-        Todo.user_id == auth.user.id
+    instance = session.query(Category).filter(
+        Category.id == category,
+        Category.user_id == auth.user.id
     ).first()
 
     if not instance:
-        raise NotFound({'message': 'Todo not found'})
+        raise NotFound({'message': 'Category not found'})
 
     session.delete(instance)
     session.commit()
@@ -201,13 +237,13 @@ def delete_todo(session: Session, todo: TodoId, auth: Auth):
 
 @annotate(authentication=[SQLAlchemyTokenAuthentication()],
           permissions=[IsAuthenticated()])
-def list_todos(session: Session, auth: Auth):
+def list_categories(session: Session, auth: Auth):
     """
-    This endpoint shows todos
+    This endpoint shows categories
     """
-    todos = session.query(Todo).filter(
-        Todo.user_id == auth.user.id).all()
+    categories = session.query(Category).filter(
+        Category.user_id == auth.user.id).all()
     return [
-        TodoList(todo)
-        for todo in todos
+        Category(category)
+        for category in categories
     ]

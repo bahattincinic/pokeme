@@ -4,7 +4,7 @@ from apistar_token_auth.handlers import sqlalcamy_get_token
 
 from pokeme.views import (
     user_profile, signup, create_note, update_note, delete_note,
-    list_notes, create_todo, update_todo, delete_todo, list_todos,
+    list_notes, create_category, update_category, delete_category, list_categories,
     update_profile
 )
 
@@ -18,10 +18,10 @@ routes = [
     Route('/notes/', 'POST', create_note, 'Create-Note'),
     Route('/notes/{note}/', 'DELETE', delete_note, 'Delete-Note'),
     Route('/notes/{note}/', 'PUT', update_note, 'Update-Note'),
-    Route('/todos/', 'GET', list_todos, 'List-Todos'),
-    Route('/todos/', 'POST', create_todo, 'Create-Todo'),
-    Route('/todos/{todo}/', 'DELETE', delete_todo, 'Delete-Todo'),
-    Route('/todos/{todo}/', 'PUT', update_todo, 'Update-Todo'),
+    Route('/categories/', 'GET', list_categories, 'List-Categories'),
+    Route('/categories/', 'POST', create_category, 'Create-Category'),
+    Route('/categories/{category}/', 'DELETE', delete_category, 'Delete-Category'),
+    Route('/categories/{category}/', 'PUT', update_category, 'Update-Category'),
     Include('/docs', docs_urls),
     Include('/static', static_urls)
 ]
