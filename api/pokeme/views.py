@@ -178,6 +178,8 @@ def list_notes(session: Session, auth: Auth):
             'title': note.title,
             'text': note.text,
             'id': note.id,
+            'is_archived': note.is_archived,
+            'reminder_date': note.reminder_date
             'created_at': note.created_at
         }
         if note.category:

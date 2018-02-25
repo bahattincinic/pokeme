@@ -20,6 +20,12 @@ public class Note {
     @SerializedName("created_at")
     private String createdAt;
 
+    @SerializedName("is_archived")
+    private Boolean is_archived;
+
+    @SerializedName("reminder_date")
+    private Boolean reminder_date;
+
     public String getTitle() {
         return title;
     }
@@ -34,5 +40,13 @@ public class Note {
 
     public String getCreatedAt() {
         return createdAt;
+    }
+
+    public Boolean getisArchived() {
+        return is_archived;
+    }
+
+    public Boolean getReminderDate() {
+        return reminder_date;
     }
 }

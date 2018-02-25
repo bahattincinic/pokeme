@@ -37,7 +37,9 @@ class NoteList(typesystem.Object):
         'text': typesystem.String,
         'id': typesystem.Integer,
         'category': CategoryList,
-        'created_at': typesystem.String
+        'created_at': typesystem.String,
+        'reminder_date': typesystem.String,
+        'is_archived': typesystem.Boolean
     }
 
 
