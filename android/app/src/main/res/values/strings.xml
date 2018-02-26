@@ -13,4 +13,6 @@
     <string name="login_invalid">Username or password invalid</string>
     <string name="create_new_category">Create New Category</string>
     <string name="create_new_note">Create New Note</string>
+    <string name="menu_notes">Notes</string>
+    <string name="menu_logout">Logout</string>
 </resources>

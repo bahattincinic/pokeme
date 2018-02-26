@@ -1,25 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:fillViewport="false"
     android:scrollbars="vertical"
-    tools:context="com.pokeme.LoginActivity">
+    tools:context="com.pokeme.SignupActivity"
+    android:orientation="horizontal">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/colorPrimary"
+        android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
+        app:title="@string/login_activity_name"
+        app:titleTextColor="#fff" />
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
+        android:layout_height="match_parent"
         android:layout_gravity="center"
-        android:gravity="center">
+        android:gravity="center"
+        android:orientation="vertical">
 
         <EditText
             android:id="@+id/txtLoginUsername"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
             android:ems="10"
             android:hint="@string/username_label"
             android:inputType="textPersonName" />
@@ -27,20 +36,18 @@
         <EditText
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
             android:ems="10"
             android:hint="@string/password_label"
             android:id="@+id/txtLoginPassword"
             android:inputType="textPassword" />
-
 
         <Button
             android:id="@+id/btnLogin"
             android:layout_width="212dp"
             android:onClick="onSubmit"
             android:layout_height="wrap_content"
-            android:text="@string/login_btn"></Button>
+            android:text="@string/login_btn"/>
 
     </LinearLayout>
 
-</ScrollView>
+</RelativeLayout>
