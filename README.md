@@ -11,7 +11,7 @@ To-do & Note Android App
 
 ```bash
 $ docker-compose up -d --build
-$ docker exec -it "apistar create_tables"
+$ docker-compose exec api /bin/bash -c 'apistar create_tables'
 ```
 
 ### Start

@@ -2,33 +2,36 @@ version: '3'
 
 services:
 
-  db:
+  database:
     image: postgres
-    container_name: db
+    container_name: database
     ports:
       - 5432:5432
     volumes:
       - ./init.sql:/docker-entrypoint-initdb.d/init.sql
-      - /var/lib/postgres
+      - postgres:/var/lib/postgresql/data
     environment:
       - POSTGRES_USER:postgres
       - POSTGRES_PASSWORD:postgres
 
   api:
     build: ./api
-    restart: on-failure
     container_name: api
     links:
-      - db
+      - database
     depends_on:
-      - db
+      - database
     ports:
       - 8080:8080
     volumes:
       - "./api/:/api"
     environment:
-      - "${POKEME_DATABASE_URL}:${POKEME_DATABASE_URL}"
-    command: apistar run
+      - POKEME_DATABASE_URL=${POKEME_DATABASE_URL}
+      - POKEME_DEBUG=${POKEME_DEBUG}
+    command: apistar run --port 8080 --host 0.0.0.0
     tty: true
     stdin_open: true
-  
+
+volumes:
+  postgres:
+    driver: 'local'
