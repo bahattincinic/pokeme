@@ -3,6 +3,7 @@ package com.pokeme;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
+
 public class CategoryCreateActivity extends AppCompatActivity {
 
     @Override
