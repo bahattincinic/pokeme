@@ -14,4 +14,8 @@
     <string name="login_invalid">Kullanıcı adı veya şifre geçersiz</string>
     <string name="create_new_category">Yeni Kategori Oluştur</string>
     <string name="create_new_note">Yeni Not Oluştur</string>
+    <string name="menu_notes">Notlar</string>
+    <string name="menu_add_note">Yeni Not</string>
+    <string name="menu_add_category">Yeni Kategori</string>
+    <string name="menu_logout">Çıkış Yap</string>
 </resources>

@@ -6,6 +6,14 @@
             android:icon="@drawable/dashboard"
             android:title="@string/menu_notes" />
         <item
+            android:id="@+id/nav_add_note"
+            android:icon="@drawable/dashboard"
+            android:title="@string/menu_add_note" />
+        <item
+            android:id="@+id/nav_add_category"
+            android:icon="@drawable/dashboard"
+            android:title="@string/menu_add_category" />
+        <item
             android:id="@+id/nav_logout"
             android:icon="@drawable/logout"
             android:title="@string/menu_logout" />

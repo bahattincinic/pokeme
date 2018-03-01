@@ -14,5 +14,7 @@
     <string name="create_new_category">Create New Category</string>
     <string name="create_new_note">Create New Note</string>
     <string name="menu_notes">Notes</string>
+    <string name="menu_add_note">Add Note</string>
+    <string name="menu_add_category">Add Category</string>
     <string name="menu_logout">Logout</string>
 </resources>
