@@ -46,7 +46,10 @@ def update_profile(session: Session, auth: Auth, data: ProfileUpdate,
         user.password = hash_password(data['password'], settings)
 
     session.commit()
-    return Response(status=200)
+    return {
+        'username': user.username,
+        'id': user.id
+    }
 
 
 def signup(session: Session, data: Signup, settings: Settings):
@@ -186,7 +189,10 @@ def list_notes(session: Session, auth: Auth):
             props['category'] = CategoryList(note.category)
 
         response.append(NoteList(**props))
-    return response
+    return {
+        'count': len(response),
+        'results': response
+    }
 
 
 @annotate(authentication=[SQLAlchemyTokenAuthentication()],
@@ -254,7 +260,13 @@ def list_categories(session: Session, auth: Auth):
     """
     categories = session.query(Category).filter(
         Category.user_id == auth.user.id).all()
-    return [
+
+    response = [
         CategoryList(category)
         for category in categories
     ]
+
+    return {
+        'count': len(response),
+        'results': response
+    }

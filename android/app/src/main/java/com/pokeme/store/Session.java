@@ -4,6 +4,7 @@ package com.pokeme.store;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
+import android.support.v4.app.FragmentActivity;
 
 import com.pokeme.service.Config;
 
@@ -19,6 +20,13 @@ public class Session {
     public static Session getInstance(Context context) {
         if (instance == null) {
             instance = new Session(context);
+        }
+        return instance;
+    }
+
+    public static Session getInstance(FragmentActivity activity) {
+        if (instance == null) {
+            instance = new Session(activity.getApplicationContext());
         }
         return instance;
     }

@@ -11,11 +11,8 @@ public class Category {
     @SerializedName("id")
     private String id;
 
-    @SerializedName("title")
+    @SerializedName("name")
     private String name;
-
-    @SerializedName("created_at")
-    private String createdAt;
 
     public String getName() {
         return name;
@@ -23,9 +20,5 @@ public class Category {
 
     public String getId() {
         return id;
-    }
-
-    public String getCreatedAt() {
-        return createdAt;
     }
 }

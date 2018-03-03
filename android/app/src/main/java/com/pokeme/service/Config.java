@@ -2,7 +2,7 @@ package com.pokeme.service;
 
 
 public class Config {
-    public static String API_DOMAIN = "http://192.168.0.10:8080";
+    public static String API_DOMAIN = "http://192.168.43.206:8080";
     public static String LOGIN_URL = "/token/";
     public static String SIGNUP_URL = "/signup/";
     public static String CATEGORY_LIST_URL = "/categories/";
