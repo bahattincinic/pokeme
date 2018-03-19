@@ -37,7 +37,7 @@ public class CategoriesTab extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.categories_tab, container, false);
+        return inflater.inflate(R.layout.tab_categories, container, false);
     }
 
     @Override
