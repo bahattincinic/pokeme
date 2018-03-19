@@ -13,6 +13,9 @@ import android.content.Intent;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 
+import com.pokeme.fragments.CreateCategoryFragment;
+import com.pokeme.fragments.CreateNoteFragment;
+import com.pokeme.fragments.ListFragment;
 import com.pokeme.store.Session;
 
 

@@ -5,7 +5,7 @@
     android:layout_gravity="center"
     android:gravity="center"
     android:orientation="vertical"
-    tools:context="com.pokeme.CreateCategoryFragment">
+    tools:context="com.pokeme.fragments.CreateCategoryFragment">
 
     <EditText
         android:id="@+id/txtCategoryName"
