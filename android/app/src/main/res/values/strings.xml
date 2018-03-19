@@ -17,4 +17,6 @@
     <string name="menu_add_note">Add Note</string>
     <string name="menu_add_category">Add Category</string>
     <string name="menu_logout">Logout</string>
+    <string name="list_title">Notes &amp; Categories List</string>
+    <string name="category_name">Category Name</string>
 </resources>

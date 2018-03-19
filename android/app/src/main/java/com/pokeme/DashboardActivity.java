@@ -2,9 +2,9 @@ package com.pokeme;
 
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
-import android.support.design.widget.TabLayout;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.view.GravityCompat;
-import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -13,28 +13,18 @@ import android.content.Intent;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 
-import com.google.gson.Gson;
-import com.pokeme.models.User;
 import com.pokeme.store.Session;
-import com.pokeme.tabs.Pager;
 
 
-public class DashboardActivity extends AppCompatActivity implements TabLayout.OnTabSelectedListener {
-    User user;
-
+public class DashboardActivity extends AppCompatActivity {
     private DrawerLayout drawer;
     private NavigationView navigation;
     private Session session;
-    private TabLayout tabLayout;
-    private ViewPager viewPager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dashboard);
-
-        Intent intent = getIntent();
-        user = new Gson().fromJson(intent.getStringExtra("user"), User.class);
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         toolbar.setTitleTextColor(getResources().getColor(R.color.white));
@@ -51,26 +41,40 @@ public class DashboardActivity extends AppCompatActivity implements TabLayout.On
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 int id = item.getItemId();
+                Intent intent = null;
+                Fragment fragment = null;
+                FragmentManager fragmentManager = getSupportFragmentManager();
+
                 switch (id) {
                     case R.id.nav_logout:
                         session.clearSession();
-                        Intent intent = new Intent(DashboardActivity.this, WelcomeActivity.class);
-                        finish();
-                        startActivity(intent);
+                        intent = new Intent(DashboardActivity.this, WelcomeActivity.class);
+                        break;
+                    case R.id.nav_notes:
+                        fragment = new ListFragment();
+                        break;
+                    case R.id.nav_add_category:
+                        fragment = new CreateCategoryFragment();
                         break;
                 }
+
+                if (intent != null) {
+                    finish();
+                    startActivity(intent);
+                } else if (fragment != null) {
+                    fragmentManager.beginTransaction().replace(R.id.content_frame, fragment).commit();
+                }
+
+                drawer.closeDrawers();
+
                 return false;
             }
         });
 
-        tabLayout = (TabLayout) findViewById(R.id.tabLayout);
-        tabLayout.addTab(tabLayout.newTab().setText("Notes"));
-        tabLayout.addTab(tabLayout.newTab().setText("Categories"));
-        tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
-        viewPager = (ViewPager) findViewById(R.id.pager);
-        Pager adapter = new Pager(getSupportFragmentManager(), tabLayout.getTabCount());
-        viewPager.setAdapter(adapter);
-        tabLayout.setOnTabSelectedListener(this);
+        // default fragment.
+        getSupportFragmentManager().beginTransaction().replace(
+                R.id.content_frame, new ListFragment()
+        ).commit();
     }
 
     @Override
@@ -81,20 +85,5 @@ public class DashboardActivity extends AppCompatActivity implements TabLayout.On
                 return true;
         }
         return super.onOptionsItemSelected(item);
-    }
-
-    @Override
-    public void onTabSelected(TabLayout.Tab tab) {
-        viewPager.setCurrentItem(tab.getPosition());
-    }
-
-    @Override
-    public void onTabUnselected(TabLayout.Tab tab) {
-
-    }
-
-    @Override
-    public void onTabReselected(TabLayout.Tab tab) {
-
     }
 }

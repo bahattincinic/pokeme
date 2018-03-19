@@ -18,4 +18,6 @@
     <string name="menu_add_note">Yeni Not</string>
     <string name="menu_add_category">Yeni Kategori</string>
     <string name="menu_logout">Çıkış Yap</string>
+    <string name="list_title">Notlar &amp; Kategoriler Listesi</string>
+    <string name="category_name">Kategori Adı</string>
 </resources>
