@@ -53,6 +53,9 @@ public class DashboardActivity extends AppCompatActivity {
                     case R.id.nav_notes:
                         fragment = new ListFragment();
                         break;
+                    case R.id.nav_add_note:
+                        fragment = new CreateNoteFragment();
+                        break;
                     case R.id.nav_add_category:
                         fragment = new CreateCategoryFragment();
                         break;

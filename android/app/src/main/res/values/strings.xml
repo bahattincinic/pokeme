@@ -19,4 +19,9 @@
     <string name="menu_logout">Logout</string>
     <string name="list_title">Notes &amp; Categories List</string>
     <string name="category_name">Category Name</string>
+    <string name="tab_notes_name">Notes</string>
+    <string name="tab_categories_name">Categories</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

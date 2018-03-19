@@ -20,4 +20,6 @@
     <string name="menu_logout">Çıkış Yap</string>
     <string name="list_title">Notlar &amp; Kategoriler Listesi</string>
     <string name="category_name">Kategori Adı</string>
+    <string name="tab_notes_name">Notlar</string>
+    <string name="tab_categories_name">Kategoriler</string>
 </resources>
