@@ -35,7 +35,7 @@ public class CategoryService extends BaseService {
 
         return makeRequestWithToken(
                 Config.getURL(Config.CATEGORY_LIST_URL),
-                Request.Method.GET,
+                Request.Method.POST,
                 token,
                 callback,
                 data
