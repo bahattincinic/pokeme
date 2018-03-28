@@ -1,5 +1,7 @@
 package com.pokeme.tabs;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -7,6 +9,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
@@ -48,12 +51,55 @@ public class CategoriesTab extends Fragment {
         adapter = new ArrayAdapter<String>(getContext(),
                 android.R.layout.simple_list_item_1, android.R.id.text1, values);
         listView.setAdapter(adapter);
+
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                AlertDialog.Builder dialog = new AlertDialog.Builder(getContext());
+                dialog.setTitle("Category Delete");
+                dialog
+                        .setMessage("Are you sure really want to delete it ?")
+                        .setCancelable(false)
+                        .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog,int id) {
+                                try {
+                                    JsonObjectRequest request = CategoryService.deleteCategory(token, 1, new VolleyCallback() {
+                                        @Override
+                                        public void onSuccess(JSONObject instance) {
+                                            adapter.clear();
+                                            fetchCategories();
+                                        }
+
+                                        @Override
+                                        public void onError(VolleyError error) {
+                                            Log.w(this.getClass().getSimpleName(), error.toString());
+                                        }
+                                    });
+                                    queue.add(request);
+                                } catch (JSONException e) {
+                                    Log.w(this.getClass().getSimpleName(), e.toString());
+                                }
+                            }
+                        })
+                        .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog,int id) {
+                                dialog.cancel();
+                            }
+                        });
+                AlertDialog alertDialog = dialog.create();
+                alertDialog.show();
+            }
+        });
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        fetchCategories();
+    }
+
+    public void fetchCategories() {
         try {
             JsonObjectRequest request = CategoryService.getCategories(token, new VolleyCallback() {
                 @Override
@@ -63,7 +109,7 @@ public class CategoriesTab extends Fragment {
                         categories = new Gson().fromJson(list.toString(), Category[].class);
                         fillListView();
                     } catch (JSONException e) {
-                        e.printStackTrace();
+                        Log.w(this.getClass().getSimpleName(), e.toString());
                     }
                 }
                 @Override
