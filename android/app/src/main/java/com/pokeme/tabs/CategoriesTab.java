@@ -58,9 +58,9 @@ public class CategoriesTab extends Fragment {
                 AlertDialog.Builder dialog = new AlertDialog.Builder(getContext());
                 dialog.setTitle("Category Delete");
                 dialog
-                        .setMessage("Are you sure really want to delete it ?")
+                        .setMessage(R.string.category_delete)
                         .setCancelable(false)
-                        .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                        .setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog,int id) {
                                 try {
                                     JsonObjectRequest request = CategoryService.deleteCategory(token, 1, new VolleyCallback() {
@@ -81,7 +81,7 @@ public class CategoriesTab extends Fragment {
                                 }
                             }
                         })
-                        .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                        .setNegativeButton(R.string.no, new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog,int id) {
                                 dialog.cancel();
                             }

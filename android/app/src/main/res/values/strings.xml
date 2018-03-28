@@ -22,6 +22,9 @@
     <string name="category_name">Category Name</string>
     <string name="tab_notes_name">Notes</string>
     <string name="tab_categories_name">Categories</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="category_delete">Are you sure really want to delete it ?</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
