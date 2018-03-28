@@ -22,4 +22,9 @@ public class User {
     public String getToken() {
         return token;
     }
+
+    @Override
+    public String toString() {
+        return getUsername();
+    }
 }

@@ -9,7 +9,7 @@ public class Category {
     */
 
     @SerializedName("id")
-    private String id;
+    private Integer id;
 
     @SerializedName("name")
     private String name;
@@ -18,7 +18,12 @@ public class Category {
         return name;
     }
 
-    public String getId() {
+    public Integer getId() {
         return id;
+    }
+
+    @Override
+    public String toString() {
+        return getName();
     }
 }

@@ -49,4 +49,9 @@ public class Note {
     public Boolean getReminderDate() {
         return reminder_date;
     }
+
+    @Override
+    public String toString() {
+        return getTitle();
+    }
 }

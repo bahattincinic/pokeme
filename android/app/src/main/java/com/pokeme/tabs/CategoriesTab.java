@@ -27,16 +27,13 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.ArrayList;
-
 
 public class CategoriesTab extends Fragment {
     NetworkManager queue = NetworkManager.getInstance(getActivity());
     String token = Session.getInstance(getActivity()).getToken();
     Category[] categories;
     ListView listView;
-    ArrayList<String> values;
-    ArrayAdapter<String> adapter;
+    ArrayAdapter<Category> adapter;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -47,45 +44,41 @@ public class CategoriesTab extends Fragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         listView = (ListView) getView().findViewById(R.id.category_list);
-        values = new ArrayList<String>();
-        adapter = new ArrayAdapter<String>(getContext(),
-                android.R.layout.simple_list_item_1, android.R.id.text1, values);
-        listView.setAdapter(adapter);
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                final Category category = (Category) adapterView.getItemAtPosition(i);
                 AlertDialog.Builder dialog = new AlertDialog.Builder(getContext());
-                dialog.setTitle("Category Delete");
+                dialog.setTitle(R.string.category_delete_title);
                 dialog
-                        .setMessage(R.string.category_delete)
-                        .setCancelable(false)
-                        .setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog,int id) {
-                                try {
-                                    JsonObjectRequest request = CategoryService.deleteCategory(token, 1, new VolleyCallback() {
-                                        @Override
-                                        public void onSuccess(JSONObject instance) {
-                                            adapter.clear();
-                                            fetchCategories();
-                                        }
+                    .setMessage(R.string.category_delete)
+                    .setCancelable(false)
+                    .setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            try {
+                                JsonObjectRequest request = CategoryService.deleteCategory(token, category.getId(), new VolleyCallback() {
+                                    @Override
+                                    public void onSuccess(JSONObject instance) {
+                                        fetchCategories();
+                                    }
 
-                                        @Override
-                                        public void onError(VolleyError error) {
-                                            Log.w(this.getClass().getSimpleName(), error.toString());
-                                        }
-                                    });
-                                    queue.add(request);
-                                } catch (JSONException e) {
-                                    Log.w(this.getClass().getSimpleName(), e.toString());
-                                }
+                                    @Override
+                                    public void onError(VolleyError error) {
+                                        Log.w(this.getClass().getSimpleName(), error.toString());
+                                    }
+                                });
+                                queue.add(request);
+                            } catch (JSONException e) {
+                                Log.w(this.getClass().getSimpleName(), e.toString());
                             }
-                        })
-                        .setNegativeButton(R.string.no, new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog,int id) {
-                                dialog.cancel();
-                            }
-                        });
+                        }
+                    })
+                    .setNegativeButton(R.string.no, new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog,int id) {
+                            dialog.cancel();
+                        }
+                    });
                 AlertDialog alertDialog = dialog.create();
                 alertDialog.show();
             }
@@ -107,7 +100,10 @@ public class CategoriesTab extends Fragment {
                     try {
                         JSONArray list = instance.getJSONArray("results");
                         categories = new Gson().fromJson(list.toString(), Category[].class);
-                        fillListView();
+
+                        adapter = new ArrayAdapter<Category>(getContext(),
+                                android.R.layout.simple_list_item_1, android.R.id.text1, categories);
+                        listView.setAdapter(adapter);
                     } catch (JSONException e) {
                         Log.w(this.getClass().getSimpleName(), e.toString());
                     }
@@ -121,12 +117,5 @@ public class CategoriesTab extends Fragment {
         } catch (JSONException e) {
             e.printStackTrace();
         }
-    }
-
-    public void fillListView() {
-        for (int i=0; i < categories.length; i++) {
-            values.add(categories[i].getName());
-        }
-        adapter.notifyDataSetChanged();
     }
 }

@@ -162,7 +162,10 @@ def delete_note(session: Session, note: int, auth: Auth):
 
     session.delete(instance)
     session.commit()
-    return Response(status=204)
+    return Response(
+        status=200,
+        content={'message': 'Note Deleted'}
+    )
 
 
 @annotate(authentication=[SQLAlchemyTokenAuthentication()],
@@ -249,7 +252,10 @@ def delete_category(session: Session, category: int, auth: Auth):
 
     session.delete(instance)
     session.commit()
-    return Response(status=204)
+    return Response(
+        status=200,
+        content={'message': 'Category Deleted'}
+    )
 
 
 @annotate(authentication=[SQLAlchemyTokenAuthentication()],

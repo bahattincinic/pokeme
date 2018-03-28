@@ -26,4 +26,5 @@
     <string name="yes">Evet</string>
     <string name="no">Hayır</string>
     <string name="category_delete">Gerçekten Silmek istediğine emin misin ?</string>
+    <string name="category_delete_title">Kategori Silmek</string>
 </resources>
