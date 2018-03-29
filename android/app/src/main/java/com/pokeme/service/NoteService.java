@@ -31,14 +31,15 @@ public class NoteService extends BaseService {
         );
     }
 
-    public static JsonObjectRequest createNote(String title, String text, String token, final VolleyCallback callback) throws JSONException {
+    public static JsonObjectRequest createNote(String title, String text, Integer category, String token, final VolleyCallback callback) throws JSONException {
         JSONObject data = new JSONObject();
         data.put("title", title);
         data.put("text", text);
+        data.put("category", category);
 
         return makeRequestWithToken(
                 Config.getURL(Config.NOTE_LIST_URL),
-                Request.Method.GET,
+                Request.Method.POST,
                 token,
                 callback,
                 data

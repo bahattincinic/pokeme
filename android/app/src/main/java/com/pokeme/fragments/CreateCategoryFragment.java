@@ -16,7 +16,6 @@ import android.widget.Toast;
 
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
-import com.pokeme.LoginActivity;
 import com.pokeme.R;
 import com.pokeme.service.CategoryService;
 import com.pokeme.service.NetworkManager;

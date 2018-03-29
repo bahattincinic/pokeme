@@ -9,6 +9,8 @@
     <string name="username_required_message">Username is Required</string>
     <string name="password_required_message">Password is Required</string>
     <string name="category_name_required_message">Category name is Required</string>
+    <string name="note_name_required_message">Note Name is Required</string>
+    <string name="note_content_required_message">Note Content is Required</string>
     <string name="loading">Loading...</string>
     <string name="username_used">Username already in use</string>
     <string name="login_invalid">Username or password invalid</string>
@@ -26,6 +28,10 @@
     <string name="no">No</string>
     <string name="category_delete">Are you sure really want to delete it ?</string>
     <string name="category_delete_title">Category Delete</string>
+    <string name="note_name">Note Name</string>
+    <string name="note_content">Note Content</string>
+    <string name="note_create_btn">Create Note</string>
+    <string name="category_select_prompt">Choose a Category</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>

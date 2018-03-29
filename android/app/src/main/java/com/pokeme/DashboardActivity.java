@@ -1,5 +1,7 @@
 package com.pokeme;
 
+import android.annotation.SuppressLint;
+import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
@@ -12,6 +14,10 @@ import android.os.Bundle;
 import android.content.Intent;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.view.MotionEvent;
+import android.view.View;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.LinearLayout;
 
 import com.pokeme.fragments.CreateCategoryFragment;
 import com.pokeme.fragments.CreateNoteFragment;
@@ -24,6 +30,7 @@ public class DashboardActivity extends AppCompatActivity {
     private NavigationView navigation;
     private Session session;
 
+    @SuppressLint("ClickableViewAccessibility")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -81,6 +88,23 @@ public class DashboardActivity extends AppCompatActivity {
         getSupportFragmentManager().beginTransaction().replace(
                 R.id.content_frame, new ListFragment()
         ).commit();
+
+        LinearLayout layout = (LinearLayout)findViewById(R.id.content_layout);
+        layout.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                hideKeyboard(view);
+                return false;
+            }
+        });
+    }
+
+    protected void hideKeyboard(View view) {
+        /*
+        Hide Keyboard by touching screen outside keyboard
+        */
+        InputMethodManager in = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+        in.hideSoftInputFromWindow(view.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
     }
 
     @Override

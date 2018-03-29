@@ -9,6 +9,8 @@
     <string name="username_required_message">Kullanıcı adı alanı zorunludur</string>
     <string name="password_required_message">Şifre alanı zorunludur</string>
     <string name="category_name_required_message">Kategori alanı zorunludur.</string>
+    <string name="note_name_required_message">Not Adı zorunludur.</string>
+    <string name="note_content_required_message">Not İçeriği Zorunludur.</string>
     <string name="login_btn">Giriş Yap</string>
     <string name="loading">Yükleniyor...</string>
     <string name="username_used">Kullanıcı adı zaten kullanımda</string>
@@ -27,4 +29,8 @@
     <string name="no">Hayır</string>
     <string name="category_delete">Gerçekten Silmek istediğine emin misin ?</string>
     <string name="category_delete_title">Kategori Silmek</string>
+    <string name="note_name">Not Adı</string>
+    <string name="note_create_btn">Not Oluştur</string>
+    <string name="note_content">Not İçeriği</string>
+    <string name="category_select_prompt">Kategori Seç</string>
 </resources>
