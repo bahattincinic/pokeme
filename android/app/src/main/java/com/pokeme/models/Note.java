@@ -9,7 +9,7 @@ public class Note {
     */
 
     @SerializedName("id")
-    private String id;
+    private Integer id;
 
     @SerializedName("title")
     private String title;
@@ -34,7 +34,7 @@ public class Note {
         return text;
     }
 
-    public String getId() {
+    public Integer getId() {
         return id;
     }
 

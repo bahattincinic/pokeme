@@ -27,8 +27,9 @@
     <string name="tab_categories_name">Kategoriler</string>
     <string name="yes">Evet</string>
     <string name="no">Hayır</string>
-    <string name="category_delete">Gerçekten Silmek istediğine emin misin ?</string>
+    <string name="delete_message">Gerçekten Silmek istediğine emin misin ?</string>
     <string name="category_delete_title">Kategori Silmek</string>
+    <string name="note_delete_title">Not Silmek</string>
     <string name="note_name">Not Adı</string>
     <string name="note_create_btn">Not Oluştur</string>
     <string name="note_content">Not İçeriği</string>

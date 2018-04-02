@@ -49,38 +49,7 @@ public class CategoriesTab extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 final Category category = (Category) adapterView.getItemAtPosition(i);
-                AlertDialog.Builder dialog = new AlertDialog.Builder(getContext());
-                dialog.setTitle(R.string.category_delete_title);
-                dialog
-                    .setMessage(R.string.category_delete)
-                    .setCancelable(false)
-                    .setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int id) {
-                            try {
-                                JsonObjectRequest request = CategoryService.deleteCategory(token, category.getId(), new VolleyCallback() {
-                                    @Override
-                                    public void onSuccess(JSONObject instance) {
-                                        fetchCategories();
-                                    }
-
-                                    @Override
-                                    public void onError(VolleyError error) {
-                                        Log.w(this.getClass().getSimpleName(), error.toString());
-                                    }
-                                });
-                                queue.add(request);
-                            } catch (JSONException e) {
-                                Log.w(this.getClass().getSimpleName(), e.toString());
-                            }
-                        }
-                    })
-                    .setNegativeButton(R.string.no, new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog,int id) {
-                            dialog.cancel();
-                        }
-                    });
-                AlertDialog alertDialog = dialog.create();
-                alertDialog.show();
+                deleteCategory(category);
             }
         });
     }
@@ -90,6 +59,41 @@ public class CategoriesTab extends Fragment {
         super.onCreate(savedInstanceState);
 
         fetchCategories();
+    }
+
+    public void deleteCategory(final Category category) {
+        AlertDialog.Builder dialog = new AlertDialog.Builder(getContext());
+        dialog.setTitle(R.string.category_delete_title);
+        dialog
+                .setMessage(R.string.delete_message)
+                .setCancelable(false)
+                .setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        try {
+                            JsonObjectRequest request = CategoryService.deleteCategory(token, category.getId(), new VolleyCallback() {
+                                @Override
+                                public void onSuccess(JSONObject instance) {
+                                    fetchCategories();
+                                }
+
+                                @Override
+                                public void onError(VolleyError error) {
+                                    Log.w(this.getClass().getSimpleName(), error.toString());
+                                }
+                            });
+                            queue.add(request);
+                        } catch (JSONException e) {
+                            Log.w(this.getClass().getSimpleName(), e.toString());
+                        }
+                    }
+                })
+                .setNegativeButton(R.string.no, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog,int id) {
+                        dialog.cancel();
+                    }
+                });
+        AlertDialog alertDialog = dialog.create();
+        alertDialog.show();
     }
 
     public void fetchCategories() {
