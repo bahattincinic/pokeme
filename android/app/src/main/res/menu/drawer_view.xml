@@ -14,6 +14,10 @@
             android:icon="@drawable/dashboard"
             android:title="@string/menu_add_category" />
         <item
+            android:id="@+id/nav_profile_update"
+            android:icon="@drawable/dashboard"
+            android:title="@string/profile_update" />
+        <item
             android:id="@+id/nav_logout"
             android:icon="@drawable/logout"
             android:title="@string/menu_logout" />

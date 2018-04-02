@@ -34,4 +34,6 @@
     <string name="note_create_btn">Not Oluştur</string>
     <string name="note_content">Not İçeriği</string>
     <string name="category_select_prompt">Kategori Seç</string>
+    <string name="profile_update">Profil Güncelleme</string>
+    <string name="profile_update_success">Profil güncellendi.</string>
 </resources>

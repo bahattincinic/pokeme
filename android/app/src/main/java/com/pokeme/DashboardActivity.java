@@ -22,6 +22,7 @@ import android.widget.LinearLayout;
 import com.pokeme.fragments.CreateCategoryFragment;
 import com.pokeme.fragments.CreateNoteFragment;
 import com.pokeme.fragments.ListFragment;
+import com.pokeme.fragments.ProfileUpdateFragment;
 import com.pokeme.store.Session;
 
 
@@ -68,6 +69,9 @@ public class DashboardActivity extends AppCompatActivity {
                         break;
                     case R.id.nav_add_category:
                         fragment = new CreateCategoryFragment();
+                        break;
+                    case R.id.nav_profile_update:
+                        fragment = new ProfileUpdateFragment();
                         break;
                 }
 

@@ -11,7 +11,7 @@ from pokeme.views import (
 
 routes = [
     Route('/me/', 'GET', user_profile, 'Show-User-Profile'),
-    Route('/me/', 'PUT', user_profile, 'Update-Profile'),
+    Route('/me/', 'PUT', update_profile, 'Update-Profile'),
     Route('/signup/', 'POST', signup, 'Signup'),
     Route('/token/', 'POST', sqlalcamy_get_token, 'Login'),
     Route('/notes/', 'GET', list_notes, 'List-Notes'),

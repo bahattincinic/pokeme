@@ -1,5 +1,7 @@
 package com.pokeme.service;
 
+import android.text.TextUtils;
+
 import com.android.volley.Request;
 import com.android.volley.toolbox.JsonObjectRequest;
 
@@ -41,6 +43,23 @@ public class UserService extends BaseService {
                 token,
                 callback,
                 null
+        );
+    }
+
+    public static JsonObjectRequest updateProfile(final String token, final String username, final String password, final VolleyCallback callback) throws JSONException {
+        JSONObject data = new JSONObject();
+        data.put("username", username);
+
+        if (!TextUtils.isEmpty(password)) {
+            data.put("password", password);
+        }
+
+        return makeRequestWithToken(
+                Config.getURL(Config.PROFILE_URL),
+                Request.Method.PUT,
+                token,
+                callback,
+                data
         );
     }
 }
