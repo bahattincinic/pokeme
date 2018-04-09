@@ -19,11 +19,9 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.google.gson.Gson;
 import com.pokeme.R;
-import com.pokeme.models.Category;
 import com.pokeme.models.Note;
 import com.pokeme.service.CategoryService;
 import com.pokeme.service.NetworkManager;
-import com.pokeme.service.NoteService;
 import com.pokeme.service.VolleyCallback;
 import com.pokeme.store.Session;
 
@@ -108,7 +106,16 @@ public class ListCategoryFragment extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 final Note note = (Note) adapterView.getItemAtPosition(i);
-                deleteNote(note);
+
+                Fragment fragment = new NoteDetailFragment();
+                Bundle args = new Bundle();
+                args.putInt("noteId", note.getId());
+                args.putString("noteTitle", note.getTitle());
+                args.putString("noteText", note.getText());
+                fragment.setArguments(args);
+
+                FragmentManager fragmentManager = getFragmentManager();
+                fragmentManager.beginTransaction().replace(R.id.content_frame, fragment).commit();
             }
         });
 
@@ -125,41 +132,6 @@ public class ListCategoryFragment extends Fragment {
         });
 
         fetchNotes();
-    }
-
-    public void deleteNote(final Note note) {
-        AlertDialog.Builder dialog = new AlertDialog.Builder(getContext());
-        dialog.setTitle(R.string.note_delete_title);
-        dialog
-                .setMessage(R.string.delete_message)
-                .setCancelable(false)
-                .setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
-                        try {
-                            JsonObjectRequest request = NoteService.deleteNote(token, note.getId(), new VolleyCallback() {
-                                @Override
-                                public void onSuccess(JSONObject instance) {
-                                    fetchNotes();
-                                }
-
-                                @Override
-                                public void onError(VolleyError error) {
-                                    Log.w(this.getClass().getSimpleName(), error.toString());
-                                }
-                            });
-                            queue.add(request);
-                        } catch (JSONException e) {
-                            Log.w(this.getClass().getSimpleName(), e.toString());
-                        }
-                    }
-                })
-                .setNegativeButton(R.string.no, new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog,int id) {
-                        dialog.cancel();
-                    }
-                });
-        AlertDialog alertDialog = dialog.create();
-        alertDialog.show();
     }
 
     public void fetchNotes() {
