@@ -95,8 +95,8 @@ public class CreateNoteFragment extends Fragment implements View.OnClickListener
             return;
         }
 
-        if (categorySelect.isSelected()) {
-            Category selectedItem = (Category)categorySelect.getSelectedItem();
+        Category selectedItem = (Category)categorySelect.getSelectedItem();
+        if (selectedItem != null) {
             category = selectedItem.getId();
         }
 

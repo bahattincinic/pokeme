@@ -200,6 +200,34 @@ def list_notes(session: Session, auth: Auth):
 
 @annotate(authentication=[SQLAlchemyTokenAuthentication()],
           permissions=[IsAuthenticated()])
+def list_category_notes(session: Session, category: int, auth: Auth):
+    """
+    This endpoint shows category notes
+    """
+    notes = session.query(Note).filter(
+        Note.user_id == auth.user.id,
+        Note.category_id == category
+    ).all()
+
+    response = []
+    for note in notes:
+        props = {
+            'title': note.title,
+            'text': note.text,
+            'id': note.id,
+            'is_archived': note.is_archived,
+            'reminder_date': note.reminder_date,
+            'created_at': note.created_at
+        }
+        response.append(NoteList(**props))
+    return {
+        'count': len(response),
+        'results': response
+    }
+
+
+@annotate(authentication=[SQLAlchemyTokenAuthentication()],
+          permissions=[IsAuthenticated()])
 def create_category(session: Session, data: CategoryCreate, auth: Auth):
     """
     This endpoint creates category

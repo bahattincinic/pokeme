@@ -5,6 +5,7 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,6 +18,7 @@ import com.android.volley.VolleyError;
 import com.google.gson.Gson;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.pokeme.R;
+import com.pokeme.fragments.ListCategoryFragment;
 import com.pokeme.models.Category;
 import com.pokeme.service.CategoryService;
 import com.pokeme.service.NetworkManager;
@@ -49,7 +51,15 @@ public class CategoriesTab extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 final Category category = (Category) adapterView.getItemAtPosition(i);
-                deleteCategory(category);
+
+                Fragment fragment = new ListCategoryFragment();
+                Bundle args = new Bundle();
+                args.putInt("categoryId", category.getId());
+                args.putString("categoryName", category.getName());
+                fragment.setArguments(args);
+
+                FragmentManager fragmentManager = getFragmentManager();
+                fragmentManager.beginTransaction().replace(R.id.content_frame, fragment).commit();
             }
         });
     }
@@ -61,40 +71,6 @@ public class CategoriesTab extends Fragment {
         fetchCategories();
     }
 
-    public void deleteCategory(final Category category) {
-        AlertDialog.Builder dialog = new AlertDialog.Builder(getContext());
-        dialog.setTitle(R.string.category_delete_title);
-        dialog
-                .setMessage(R.string.delete_message)
-                .setCancelable(false)
-                .setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
-                        try {
-                            JsonObjectRequest request = CategoryService.deleteCategory(token, category.getId(), new VolleyCallback() {
-                                @Override
-                                public void onSuccess(JSONObject instance) {
-                                    fetchCategories();
-                                }
-
-                                @Override
-                                public void onError(VolleyError error) {
-                                    Log.w(this.getClass().getSimpleName(), error.toString());
-                                }
-                            });
-                            queue.add(request);
-                        } catch (JSONException e) {
-                            Log.w(this.getClass().getSimpleName(), e.toString());
-                        }
-                    }
-                })
-                .setNegativeButton(R.string.no, new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog,int id) {
-                        dialog.cancel();
-                    }
-                });
-        AlertDialog alertDialog = dialog.create();
-        alertDialog.show();
-    }
 
     public void fetchCategories() {
         try {

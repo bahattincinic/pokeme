@@ -41,4 +41,14 @@ public class CategoryService extends BaseService {
                 data
         );
     }
+
+    public static JsonObjectRequest getCategoryNotes(final String token, final int categoryId, final VolleyCallback callback) throws JSONException {
+        return makeRequestWithToken(
+                String.format(Config.getURL(Config.CATEGORY_NOTES), categoryId),
+                Request.Method.GET,
+                token,
+                callback,
+                null
+        );
+    }
 }
