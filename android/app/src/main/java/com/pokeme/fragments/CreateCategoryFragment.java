@@ -66,7 +66,7 @@ public class CreateCategoryFragment extends Fragment implements View.OnClickList
             return;
         }
 
-        String token = Session.getInstance(getActivity()).getToken();
+        String token = Session.getInstance(getActivity()).getApiToken();
 
         dialog.setMessage(getString(R.string.loading));
         dialog.setCancelable(false);

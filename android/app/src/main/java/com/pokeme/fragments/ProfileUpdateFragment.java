@@ -56,7 +56,7 @@ public class ProfileUpdateFragment extends Fragment implements View.OnClickListe
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        token = Session.getInstance(getActivity()).getToken();
+        token = Session.getInstance(getActivity()).getApiToken();
         queue = NetworkManager.getInstance(getContext());
         dialog = new ProgressDialog(getContext());
 

@@ -31,15 +31,23 @@ public class Session {
         return instance;
     }
 
-    public void setToken(String token) {
-        prefs.edit().putString(Config.TOKEN_SESSION_KEY, token).apply();
+    public void setApiToken(String token) {
+        prefs.edit().putString(Config.API_TOKEN_SESSION_KEY, token).apply();
     }
 
     public void clearSession() {
         prefs.edit().clear().apply();
     }
 
-    public String getToken() {
-        return prefs.getString(Config.TOKEN_SESSION_KEY, "");
+    public String getApiToken() {
+        return prefs.getString(Config.API_TOKEN_SESSION_KEY, "");
+    }
+
+    public void setDeviceToken(String token) {
+        prefs.edit().putString(Config.FIREBASE_TOKEN, token).apply();
+    }
+
+    public String getDeviceToken() {
+        return prefs.getString(Config.FIREBASE_TOKEN, "");
     }
 }

@@ -1,8 +1,6 @@
 package com.pokeme.tabs;
 
 
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -19,7 +17,6 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.google.gson.Gson;
 import com.pokeme.R;
-import com.pokeme.fragments.ListCategoryFragment;
 import com.pokeme.fragments.NoteDetailFragment;
 import com.pokeme.models.Note;
 import com.pokeme.service.NetworkManager;
@@ -34,7 +31,7 @@ import org.json.JSONObject;
 
 public class NotesTab extends Fragment {
     NetworkManager queue = NetworkManager.getInstance(getActivity());
-    String token = Session.getInstance(getActivity()).getToken();
+    String token = Session.getInstance(getActivity()).getApiToken();
     Note[] notes;
     ListView listView;
     ArrayAdapter<Note> adapter;

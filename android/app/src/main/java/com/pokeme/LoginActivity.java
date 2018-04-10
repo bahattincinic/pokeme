@@ -68,7 +68,7 @@ public class LoginActivity extends AppCompatActivity {
                     intent.putExtra("user", instance.toString());
 
                     User user = new Gson().fromJson(instance.toString(), User.class);
-                    Session.getInstance(context).setToken(user.getToken());
+                    Session.getInstance(context).setApiToken(user.getToken());
 
                     dialog.hide();
                     finish();

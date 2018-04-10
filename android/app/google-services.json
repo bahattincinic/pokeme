@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "482079403779",
+    "firebase_url": "https://pokeme-android.firebaseio.com",
+    "project_id": "pokeme-android",
+    "storage_bucket": "pokeme-android.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:482079403779:android:916a3e8fc1a99f91",
+        "android_client_info": {
+          "package_name": "com.pokeme"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "482079403779-r93ufhgthplred6fu94oga6gpddmuu6o.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.pokeme",
+            "certificate_hash": "a11122853c920b8061f67f29f75b08118ce6df6c"
+          }
+        },
+        {
+          "client_id": "482079403779-pk43qjgg12d2p9uvhaoli4dicv66hk92.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCqKFMyywzWrVqtRLtzPTxGndXCweUzVmM"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "482079403779-pk43qjgg12d2p9uvhaoli4dicv66hk92.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

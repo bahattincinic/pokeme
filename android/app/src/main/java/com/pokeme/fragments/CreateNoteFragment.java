@@ -60,7 +60,7 @@ public class CreateNoteFragment extends Fragment implements View.OnClickListener
         Button button = (Button) view.findViewById(R.id.btnCreateNote);
         button.setOnClickListener(this);
 
-        token = Session.getInstance(getActivity()).getToken();
+        token = Session.getInstance(getActivity()).getApiToken();
         queue = NetworkManager.getInstance(getContext());
         dialog = new ProgressDialog(getContext());
 

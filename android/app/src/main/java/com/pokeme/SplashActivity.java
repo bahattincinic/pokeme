@@ -4,7 +4,6 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
@@ -40,7 +39,7 @@ public class SplashActivity extends AppCompatActivity {
         setContentView(R.layout.activity_splash);
 
         queue = NetworkManager.getInstance(this);
-        String token = Session.getInstance(this).getToken();
+        String token = Session.getInstance(this).getApiToken();
 
         if (token == null || token.isEmpty()) {
             redirectToWelcome();

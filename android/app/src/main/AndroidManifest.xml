@@ -29,6 +29,22 @@
             android:label="@string/app_name" />
         <activity android:name=".WelcomeActivity"
             android:label="@string/app_name"/>
+
+        <!-- [START Firebase Service] -->
+        <service android:name=".notifications.MyFirebaseMessagingService"
+            android:permission="com.google.android.c2dm.permission.SEND">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT"/>
+            </intent-filter>
+        </service>
+        <service
+            android:name=".notifications.MyFirebaseInstanceIDService">
+            <intent-filter>
+                <action android:name="com.google.firebase.INSTANCE_ID_EVENT"/>
+            </intent-filter>
+        </service>
+        <!-- [END Firebase Service] -->
+
     </application>
 
 </manifest>

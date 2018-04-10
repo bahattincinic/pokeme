@@ -27,7 +27,7 @@ import org.json.JSONObject;
 
 public class NoteDetailFragment extends Fragment implements View.OnClickListener {
     NetworkManager queue = NetworkManager.getInstance(getActivity());
-    String token = Session.getInstance(getActivity()).getToken();
+    String token = Session.getInstance(getActivity()).getApiToken();
     String noteTitle;
     Integer noteId;
     String noteText;

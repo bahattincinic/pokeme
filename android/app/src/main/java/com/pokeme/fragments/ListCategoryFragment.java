@@ -32,7 +32,7 @@ import org.json.JSONObject;
 
 public class ListCategoryFragment extends Fragment {
     NetworkManager queue = NetworkManager.getInstance(getActivity());
-    String token = Session.getInstance(getActivity()).getToken();
+    String token = Session.getInstance(getActivity()).getApiToken();
     String categoryName;
     Integer categoryId;
     Note[] notes;
