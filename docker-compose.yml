@@ -32,6 +32,22 @@ services:
     tty: true
     stdin_open: true
 
+  schedule:
+    build: ./api
+    container_name: schedule
+    links:
+      - database
+    depends_on:
+      - database
+    volumes:
+      - "./api/:/api"
+    environment:
+      - POKEME_DATABASE_URL=${POKEME_DATABASE_URL}
+      - POKEME_DEBUG=${POKEME_DEBUG}
+    command: apistar schedule
+    tty: true
+    stdin_open: true
+
 volumes:
   postgres:
     driver: 'local'

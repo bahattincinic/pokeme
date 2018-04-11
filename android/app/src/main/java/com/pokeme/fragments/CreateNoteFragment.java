@@ -18,6 +18,7 @@ import android.widget.Toast;
 
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.gson.Gson;
 import com.pokeme.R;
 import com.pokeme.models.Category;
@@ -38,6 +39,8 @@ public class CreateNoteFragment extends Fragment implements View.OnClickListener
     Spinner categorySelect;
     EditText noteTitle;
     EditText noteText;
+    EditText noteReminderDate;
+    EditText noteReminderTime;
     Category[] categories;
     ArrayAdapter<Category> adapter;
     ProgressDialog dialog;
@@ -67,6 +70,8 @@ public class CreateNoteFragment extends Fragment implements View.OnClickListener
         categorySelect = (Spinner)view.findViewById(R.id.categorySelect);
         noteTitle = (EditText)view.findViewById(R.id.txtNoteTitle);
         noteText = (EditText)view.findViewById(R.id.txtNoteText);
+        noteReminderDate = (EditText)view.findViewById(R.id.txtReminderDate);
+        noteReminderTime = (EditText)view.findViewById(R.id.txtReminderTime);
 
         fillCategorySpinner();
     }
@@ -75,6 +80,9 @@ public class CreateNoteFragment extends Fragment implements View.OnClickListener
     public void onClick(View view) {
         String title = noteTitle.getText().toString();
         String text = noteText.getText().toString();
+        String reminderDate = noteReminderDate.getText().toString();
+        String reminderTime = noteReminderTime.getText().toString();
+        String reminder = null;
         Integer category = null;
 
         if (TextUtils.isEmpty(title)) {
@@ -95,6 +103,10 @@ public class CreateNoteFragment extends Fragment implements View.OnClickListener
             return;
         }
 
+        if (!TextUtils.isEmpty(reminderDate) && !TextUtils.isEmpty(reminderTime)) {
+            reminder = reminderDate + " " + reminderTime;
+        }
+
         Category selectedItem = (Category)categorySelect.getSelectedItem();
         if (selectedItem != null) {
             category = selectedItem.getId();
@@ -105,7 +117,8 @@ public class CreateNoteFragment extends Fragment implements View.OnClickListener
         dialog.show();
 
         try {
-            JsonObjectRequest request = NoteService.createNote(title, text, category, token, new VolleyCallback() {
+            String deviceToken = FirebaseInstanceId.getInstance().getToken();
+            JsonObjectRequest request = NoteService.createNote(title, text, category, reminder, token, deviceToken, new VolleyCallback() {
                 @Override
                 public void onSuccess(JSONObject instance) {
                     dialog.hide();

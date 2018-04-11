@@ -52,5 +52,6 @@ class Note(Base):
     text = Column(Text)
     created_at = Column(DateTime, default=func.now())
 
-    is_archived = Column(Boolean, default=False)
+    is_notification_send = Column(Boolean, default=False)
     reminder_date = Column(DateTime, nullable=True)
+    device_token = Column(String)

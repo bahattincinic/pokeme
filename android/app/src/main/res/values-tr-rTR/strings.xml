@@ -36,4 +36,8 @@
     <string name="category_select_prompt">Kategori Seç</string>
     <string name="profile_update">Profil Güncelleme</string>
     <string name="profile_update_success">Profil güncellendi.</string>
+
+
+    <string name="reminder_date">Hatırlatma Günü</string>
+    <string name="reminder_time">Hatırlatma Zamanı</string>
 </resources>

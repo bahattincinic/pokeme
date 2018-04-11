@@ -1,3 +1,5 @@
+from datetime import datetime
+
 from apistar import Response, annotate, Settings
 from apistar.backends.sqlalchemy_backend import Session
 from apistar.interfaces import Auth
@@ -83,12 +85,20 @@ def create_note(session: Session, data: NoteCreate, auth: Auth):
     instance = Note(
         user_id=auth.user.id,
         title=data['title'],
-        text=data['text']
+        text=data['text'],
+        device_token=data['device_token']
     )
 
     if data.get('reminder_date'):
-        instance.reminder_date = data['reminder_date']
-    
+        try:
+            instance.reminder_date = datetime.strptime(
+                data['reminder_date'], '%Y/%m/%d %H:%M'
+            )
+        except ValueError:
+            raise ValidationError({
+                'message': 'invalid reminder date'
+            })
+
     if data.get('category'):
         category = session.query(Category).filter(
             Category.id == data['category'],
@@ -99,9 +109,6 @@ def create_note(session: Session, data: NoteCreate, auth: Auth):
             raise ValidationError({'message': 'Invalid category'})
 
         instance.category_id = category.id
-
-    if data.get('is_archived'):
-        instance.is_archived = data['is_archived']
 
     session.add(instance)
     session.flush()
@@ -124,9 +131,17 @@ def update_note(session: Session, note: int, auth: Auth, data: NoteCreate):
 
     instance.title = data['title']
     instance.text = data['text']
+    instance.device_token = data['device_token']
 
     if data.get('reminder_date'):
-        instance.reminder_date = data['reminder_date']
+        try:
+            instance.reminder_date = datetime.strptime(
+                data['reminder_date'], '%Y/%m/%d %H:%M'
+            )
+        except ValueError:
+            raise ValidationError({
+                'message': 'invalid reminder date'
+            })
     
     if data.get('category'):
         category = session.query(Category).filter(
@@ -138,9 +153,6 @@ def update_note(session: Session, note: int, auth: Auth, data: NoteCreate):
             raise ValidationError({'message': 'Invalid category'})
 
         instance.category_id = category.id
-    
-    if data.get('is_archived'):
-        instance.is_archived = data['is_archived']
 
     session.commit()
     return NoteList(session.query(Note).filter(Note.id == note).first())
@@ -184,7 +196,6 @@ def list_notes(session: Session, auth: Auth):
             'title': note.title,
             'text': note.text,
             'id': note.id,
-            'is_archived': note.is_archived,
             'reminder_date': note.reminder_date,
             'created_at': note.created_at
         }
@@ -215,7 +226,6 @@ def list_category_notes(session: Session, category: int, auth: Auth):
             'title': note.title,
             'text': note.text,
             'id': note.id,
-            'is_archived': note.is_archived,
             'reminder_date': note.reminder_date,
             'created_at': note.created_at
         }

@@ -38,8 +38,7 @@ class NoteList(typesystem.Object):
         'id': typesystem.Integer,
         'category': CategoryList,
         'created_at': typesystem.String,
-        'reminder_date': typesystem.String,
-        'is_archived': typesystem.Boolean
+        'reminder_date': typesystem.String
     }
 
 
@@ -49,6 +48,6 @@ class NoteCreate(typesystem.Object):
         'text': typesystem.String,
         'category': typesystem.Integer,
         'reminder_date': typesystem.String,
-        'is_archived': typesystem.Boolean
+        'device_token': typesystem.String
     }
-    required = ['title', 'description']
+    required = ['title', 'description', 'device_token']

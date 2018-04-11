@@ -37,6 +37,7 @@
     <string name="profile_update">Profile Update</string>
     <string name="profile_update_success">The profile has been updated.</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="reminder_date">Reminder Date</string>
+    <string name="reminder_time">Reminder Time</string>
+
 </resources>

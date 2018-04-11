@@ -34,5 +34,6 @@ settings = {
         'USER_MODEL': 'pokeme.models.User',
         'TOKEN_MODEL': 'pokeme.models.AccessToken',
         'ENCRYPTION_FUNCTION': 'pokeme.utils.hash_password'
-    }
+    },
+    'FIREBASE_TOKEN': 'AAAAcD4r7wM:APA91bGxPuKUQUk9-pAu24AxNDy8_j3tjkJ-eOVyM4wDrhc6MrdnV6hhNEgJPvEhAIMdNeJoZt8vITwjYxIiAkK2x1XCIi9d_3RbLsn-pLmKdZtNfk1CmwW0S1F8umP46VQv_8ks9FPh'  # noqa
 }
