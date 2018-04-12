@@ -1,6 +1,7 @@
 import datetime
 import schedule
 import time
+import pytz
 
 from functools import partial
 
@@ -15,10 +16,16 @@ from .settings import settings
 
 
 def check_notification(session):
+    print("Check Notification Schedule...")
+
+    now = datetime.datetime.now(
+        pytz.timezone(settings['TIMEZONE'])
+    ).strftime('%Y-%m-%d %H:%M:%S')
+
     notes = session.query(Note).join(User, User.id == Note.user_id).filter(
         Note.is_notification_send == False,
         Note.reminder_date.isnot(None),
-        Note.reminder_date < datetime.datetime.now()
+        Note.reminder_date < now
     )
 
     for note in notes.all():

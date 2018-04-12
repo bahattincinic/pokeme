@@ -26,4 +26,4 @@ def send_push_notification(title, text, device_token, credential):
         'Authorization': f'key={credential}',
         'Content-Type': 'application/json'
     }
-    requests.post(url, body=json.dumps(body), headers=headers)
+    requests.post(url, data=json.dumps(body), headers=headers)
