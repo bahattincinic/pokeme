@@ -5,18 +5,17 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
 
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.google.gson.Gson;
 import com.pokeme.R;
+import com.pokeme.components.NoteRecyclerViewAdapter;
 import com.pokeme.fragments.NoteDetailFragment;
 import com.pokeme.models.Note;
 import com.pokeme.service.NetworkManager;
@@ -33,8 +32,8 @@ public class NotesTab extends Fragment {
     NetworkManager queue = NetworkManager.getInstance(getActivity());
     String token = Session.getInstance(getActivity()).getApiToken();
     Note[] notes;
-    ListView listView;
-    ArrayAdapter<Note> adapter;
+    RecyclerView mRecyclerView;
+    NoteRecyclerViewAdapter adapter;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -52,23 +51,6 @@ public class NotesTab extends Fragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        listView = (ListView) getView().findViewById(R.id.notes_list);
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                final Note note = (Note) adapterView.getItemAtPosition(i);
-
-                Fragment fragment = new NoteDetailFragment();
-                Bundle args = new Bundle();
-                args.putInt("noteId", note.getId());
-                args.putString("noteTitle", note.getTitle());
-                args.putString("noteText", note.getText());
-                fragment.setArguments(args);
-
-                FragmentManager fragmentManager = getFragmentManager();
-                fragmentManager.beginTransaction().replace(R.id.content_frame, fragment).commit();
-            }
-        });
     }
 
     public void fetchNotes() {
@@ -80,9 +62,23 @@ public class NotesTab extends Fragment {
                         JSONArray list = instance.getJSONArray("results");
                         notes = new Gson().fromJson(list.toString(), Note[].class);
 
-                        adapter = new ArrayAdapter<Note>(getContext(),
-                                android.R.layout.simple_list_item_1, android.R.id.text1, notes);
-                        listView.setAdapter(adapter);
+                        adapter = new NoteRecyclerViewAdapter(getContext(), notes);
+                        mRecyclerView.setAdapter(adapter);
+//                        adapter.setOnItemClickListener(new OnItemClickListener() {
+//                            @Override
+//                            public void onItemClick(Note note) {
+//                                Fragment fragment = new NoteDetailFragment();
+//                                Bundle args = new Bundle();
+//                                args.putInt("noteId", note.getId());
+//                                args.putString("noteTitle", note.getTitle());
+//                                args.putString("noteText", note.getText());
+//                                fragment.setArguments(args);
+//
+//                                FragmentManager fragmentManager = getFragmentManager();
+//                                fragmentManager.beginTransaction().replace(R.id.content_frame, fragment).commit();
+//
+//                            }
+//                        });
                     } catch (JSONException e) {
                         Log.w(this.getClass().getSimpleName(), e.toString());
                     }
