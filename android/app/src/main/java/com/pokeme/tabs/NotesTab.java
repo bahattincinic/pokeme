@@ -17,6 +17,7 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.google.gson.Gson;
 import com.pokeme.R;
 import com.pokeme.components.NoteRecyclerViewAdapter;
+import com.pokeme.components.OnItemClickListener;
 import com.pokeme.fragments.NoteDetailFragment;
 import com.pokeme.models.Note;
 import com.pokeme.service.NetworkManager;
@@ -67,21 +68,20 @@ public class NotesTab extends Fragment {
 
                         adapter = new NoteRecyclerViewAdapter(getContext(), notes);
                         mRecyclerView.setAdapter(adapter);
-//                        adapter.setOnItemClickListener(new OnItemClickListener() {
-//                            @Override
-//                            public void onItemClick(Note note) {
-//                                Fragment fragment = new NoteDetailFragment();
-//                                Bundle args = new Bundle();
-//                                args.putInt("noteId", note.getId());
-//                                args.putString("noteTitle", note.getTitle());
-//                                args.putString("noteText", note.getText());
-//                                fragment.setArguments(args);
-//
-//                                FragmentManager fragmentManager = getFragmentManager();
-//                                fragmentManager.beginTransaction().replace(R.id.content_frame, fragment).commit();
-//
-//                            }
-//                        });
+                        adapter.setOnItemClickListener(new OnItemClickListener() {
+                            @Override
+                            public void onItemClick(Note item) {
+                                Fragment fragment = new NoteDetailFragment();
+                                Bundle args = new Bundle();
+                                args.putInt("noteId", item.getId());
+                                args.putString("noteTitle", item.getTitle());
+                                args.putString("noteText", item.getText());
+                                fragment.setArguments(args);
+
+                                FragmentManager fragmentManager = getFragmentManager();
+                                fragmentManager.beginTransaction().replace(R.id.content_frame, fragment).commit();
+                            }
+                        });
                     } catch (JSONException e) {
                         Log.w(this.getClass().getSimpleName(), e.toString());
                     }

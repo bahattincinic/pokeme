@@ -16,6 +16,7 @@ import com.pokeme.models.Note;
 public class NoteRecyclerViewAdapter extends RecyclerView.Adapter<NoteRecyclerViewAdapter.CustomViewHolder> {
     private Note[] noteItemList;
     private Context mContext;
+    private OnItemClickListener onItemClickListener;
 
     public NoteRecyclerViewAdapter(Context context, Note[] noteItemList) {
         this.noteItemList = noteItemList;
@@ -31,10 +32,19 @@ public class NoteRecyclerViewAdapter extends RecyclerView.Adapter<NoteRecyclerVi
 
     @Override
     public void onBindViewHolder(CustomViewHolder customViewHolder, int i) {
-        Note note = noteItemList[i];
+        final Note note = noteItemList[i];
 
         customViewHolder.cardTitle.setText(Html.fromHtml(note.getTitle()));
         customViewHolder.cardText.setText(Html.fromHtml(note.getText()));
+
+        View.OnClickListener listener = new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onItemClickListener.onItemClick(note);
+            }
+        };
+        customViewHolder.cardTitle.setOnClickListener(listener);
+        customViewHolder.cardText.setOnClickListener(listener);
     }
 
     @Override
@@ -51,5 +61,13 @@ public class NoteRecyclerViewAdapter extends RecyclerView.Adapter<NoteRecyclerVi
             this.cardTitle = (TextView) view.findViewById(R.id.cardTitle);
             this.cardText = (TextView) view.findViewById(R.id.cardText);
         }
+    }
+
+    public OnItemClickListener getOnItemClickListener() {
+        return onItemClickListener;
+    }
+
+    public void setOnItemClickListener(OnItemClickListener onItemClickListener) {
+        this.onItemClickListener = onItemClickListener;
     }
 }
