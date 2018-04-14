@@ -44,25 +44,12 @@ htmlcov/
 nosetests.xml
 coverage.xml
 *.cover
+*.sql
 .hypothesis/
 
 # Translations
 *.mo
 *.pot
-
-# Django stuff:
-*.log
-local_settings.py
-
-# Flask stuff:
-instance/
-.webassets-cache
-
-# Scrapy stuff:
-.scrapy
-
-# Sphinx documentation
-docs/_build/
 
 # PyBuilder
 target/
@@ -103,3 +90,13 @@ ENV/
 .DS_Store
 
 .vscode
+
+# Android
+*.iml
+.gradle
+/local.properties
+/.idea/workspace.xml
+/.idea/libraries
+/build
+/captures
+.externalNativeBuild

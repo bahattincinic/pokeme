@@ -104,7 +104,7 @@ def create_note(session: Session, data: NoteCreate, auth: Auth):
             Category.id == data['category'],
             Category.user_id == auth.user.id
         ).first()
-        
+
         if not category:
             raise ValidationError({'message': 'Invalid category'})
 
@@ -142,13 +142,13 @@ def update_note(session: Session, note: int, auth: Auth, data: NoteCreate):
             raise ValidationError({
                 'message': 'invalid reminder date'
             })
-    
+
     if data.get('category'):
         category = session.query(Category).filter(
             Category.id == data['category'],
             Note.user_id == auth.user.id
         ).first()
-        
+
         if not category:
             raise ValidationError({'message': 'Invalid category'})
 
@@ -253,7 +253,8 @@ def create_category(session: Session, data: CategoryCreate, auth: Auth):
 
 @annotate(authentication=[SQLAlchemyTokenAuthentication()],
           permissions=[IsAuthenticated()])
-def update_category(session: Session, category: int, auth: Auth, data: CategoryCreate):
+def update_category(session: Session, category: int, auth: Auth,
+                    data: CategoryCreate):
     """
     This endpoint updated category
     """

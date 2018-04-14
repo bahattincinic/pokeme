@@ -10,16 +10,16 @@ def hash_password(password, settings):
         password.encode(),
         settings['SALT'].encode(), 100000
     )
-    return binascii.hexlify(dk).decode("utf-8") 
+    return binascii.hexlify(dk).decode("utf-8")
 
 
 def send_push_notification(title, text, device_token, credential):
     url = "https://fcm.googleapis.com/fcm/send"
     body = {
-        "to" : device_token,
-        "data" : {
+        "to": device_token,
+        "data": {
             "title": title,
-            "message" : text
+            "message": text
         }
     }
     headers = {

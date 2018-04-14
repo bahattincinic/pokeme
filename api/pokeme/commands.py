@@ -23,7 +23,7 @@ def check_notification(session):
     ).strftime('%Y-%m-%d %H:%M:%S')
 
     notes = session.query(Note).join(User, User.id == Note.user_id).filter(
-        Note.is_notification_send == False,
+        Note.is_notification_send is False,
         Note.reminder_date.isnot(None),
         Note.reminder_date < now
     )
