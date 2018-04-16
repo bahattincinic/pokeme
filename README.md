@@ -1,6 +1,6 @@
 # Pokeme
 
-To-do & Note Android App
+Note Android App
 
 ## Components
 
