@@ -29,15 +29,16 @@ def check_notification(session):
     )
 
     for note in notes.all():
-        send_push_notification(
+        status = send_push_notification(
             title=note.title,
             text=f"Pokeme {note.title} notification",
             device_token=note.device_token,
             credential=settings['FIREBASE_TOKEN']
         )
-        note.is_notification_send = True
-        session.commit()
-        print("%s note notification was sent" % note.id)
+        if status:
+            note.is_notification_send = True
+            session.commit()
+            print("%s note notification was sent" % note.id)
 
 
 def check_schedule(backend: SQLAlchemyBackend):
