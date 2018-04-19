@@ -4,7 +4,9 @@ Note Android App
 
 ## Demo
 
-# ![](docs/demo.png)
+<img src="docs/demo.png" width="400" />
+
+[https://youtu.be/saQsPM0oNTI](https://youtu.be/saQsPM0oNTI)
 
 ## Components
 
