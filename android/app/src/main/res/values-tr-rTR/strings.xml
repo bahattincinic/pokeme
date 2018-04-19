@@ -40,4 +40,5 @@
 
     <string name="reminder_date">Hatırlatma Günü</string>
     <string name="reminder_time">Hatırlatma Zamanı</string>
+    <string name="new_password_label">Yeni Parola</string>
 </resources>

@@ -27,9 +27,9 @@
     <string name="tab_categories_name">Categories</string>
     <string name="yes">Yes</string>
     <string name="no">No</string>
-    <string name="delete_message">Are you sure really want to delete it ?</string>
-    <string name="category_delete_title">Category Delete</string>
-    <string name="note_delete_title">Note Delete</string>
+    <string name="delete_message">Are you really sure you want to delete it?</string>
+    <string name="category_delete_title">Delete Category</string>
+    <string name="note_delete_title">Delete Note</string>
     <string name="note_name">Note Name</string>
     <string name="note_content">Note Content</string>
     <string name="note_create_btn">Create Note</string>

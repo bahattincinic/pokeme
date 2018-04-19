@@ -11,6 +11,7 @@ Note Android App
 
 - English
 - Turkish
+- Spanish
 
 ## Features
 

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Pokeme</string>
+    <string name="login_btn">Iniciar Sesión</string>
+    <string name="signup_btn">Registrar</string>
+    <string name="login_activity_name">Iniciar Sesión</string>
+    <string name="signup_activity_name">Registrar</string>
+    <string name="username_label">Nombre de usuario</string>
+    <string name="password_label">Contraseña</string>
+    <string name="new_password_label">Contraseña Nueva</string>
+    <string name="username_required_message">Nombre de Usuario es Requerido</string>
+    <string name="password_required_message">Contraseña es Requerido</string>
+    <string name="category_name_required_message">Nombre de Categoría es Requerido</string>
+    <string name="note_name_required_message">Nombre de Nota es Requerido</string>
+    <string name="note_content_required_message">Nota se requiere el contenido</string>
+    <string name="loading">Cargando...</string>
+    <string name="username_used">El nombre de usuario ya está en uso</string>
+    <string name="login_invalid">El nombre de usuario o la contraseña no son válidos</string>
+    <string name="create_new_category">Crear Nueva Categoría</string>
+    <string name="create_new_note">Crear Nueva Nota</string>
+    <string name="menu_notes">Notas</string>
+    <string name="menu_add_note">Añadir Nota</string>
+    <string name="menu_add_category">Añadir Categoría</string>
+    <string name="menu_logout">Cerrar Sesión</string>
+    <string name="list_title">La Lista de Notas &amp; Categorías</string>
+    <string name="category_name">Nombre de Categoría</string>
+    <string name="tab_notes_name">Notas</string>
+    <string name="tab_categories_name">Categorías</string>
+    <string name="yes">Sí</string>
+    <string name="no">No</string>
+    <string name="delete_message">¿Estás seguro de que quieres borrarlo?</string>
+    <string name="category_delete_title">Borrar Categoría</string>
+    <string name="note_delete_title">Borrar Nota</string>
+    <string name="note_name">Nombre de Nota</string>
+    <string name="note_content">Contenido de Note</string>
+    <string name="note_create_btn">Crear Nota</string>
+    <string name="category_select_prompt">Elegir una Categoría</string>
+    <string name="profile_update">Actualizar el Perfil</string>
+    <string name="profile_update_success">El perfil ha sido actualizado.</string>
+
+    <string name="reminder_date">La Fecha de Recordatorio</string>
+    <string name="reminder_time">El Tiempo de Recordatorio</string>
+
+</resources>
