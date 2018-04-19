@@ -2,6 +2,10 @@
 
 Note Android App
 
+## Demo
+
+# ![](docs/demo.png)
+
 ## Components
 
 - [api](api/)
